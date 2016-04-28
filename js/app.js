@@ -70,8 +70,8 @@ function moveCameraOnAxis(axis) {
     throw new Error('Invalid axis!');
   }
   
-  axes.forEach(function (element, index) {
-    var value = axis === element ? (camera.position.getComponent(index) === 0 ? cameraPositionDefault[element] : camera.position.getComponent(index)) : 0;
+  axes.forEach((element, index) => {
+    let value = axis === element ? (camera.position.getComponent(index) === 0 ? cameraPositionDefault[element] : camera.position.getComponent(index)) : 0;
 
     camera.position.setComponent(index, value);
   });
@@ -145,18 +145,18 @@ function setupLight() {
 // }
 
 function addSpheres() {
-  var n = 55
-  , heightFromXInc = 5
-  , sphereSize = 5
-  , rotationSpeedDecrease = 0.13;
+  const n = 55;
+  const heightFromXInc = 5;
+  const sphereSize = 5;
+  const rotationSpeedDecrease = 0.13;
 
-  var position = new THREE.Vector3(0, 0, 0);
-  var increment = new THREE.Vector3(sphereSize * .9, 0, 0);
-  var heightFromX = 0;
+  let position = new THREE.Vector3(0, 0, 0);
+  let increment = new THREE.Vector3(sphereSize * .9, 0, 0);
+  let heightFromX = 0;
 
-  var rotationSpeed = n * 1.1 * rotationSpeedDecrease;
+  let rotationSpeed = n * 1.1 * rotationSpeedDecrease;
 
-  for (var i = 0; i < n; i++) {
+  for (let i = 0; i < n; i++) {
     rotationSpeed -= rotationSpeedDecrease;
     addSphere(sphereSize, 0xd35d6d, position, heightFromX, rotationSpeed);
     heightFromX += heightFromXInc;
@@ -165,7 +165,7 @@ function addSpheres() {
 }
 
 function addSphere (size, color, position, heightFromX, rotationSpeed) {
-  var quality = 20;
+  const quality = 20;
   var sphere = {};
 
   sphere.parent = new THREE.Object3D();
@@ -188,7 +188,7 @@ function addSphere (size, color, position, heightFromX, rotationSpeed) {
   sphere.pivot.add(sphere.mesh);
 
   if (position) {
-    for(var k in sphere.parent.position) {
+    for(let k in sphere.parent.position) {
       sphere.parent.position[k] = position[k];
     }
   }
@@ -236,7 +236,7 @@ function addSphere (size, color, position, heightFromX, rotationSpeed) {
 
 function animate() {
   requestAnimationFrame(animate);
-  var sphere;
+
   // for (let i = meshes.length - 1; i >= 0; i--) {
   //   let mesh = meshes[i]
     
@@ -245,8 +245,8 @@ function animate() {
   //   // mesh.rotateZ(Math.radians(1));
   // };
 
-  for (var i = spheres.length - 1; i >= 0; i--) {
-    sphere = spheres[i];
+  for (let i = spheres.length - 1; i >= 0; i--) {
+    let sphere = spheres[i];
     
     sphere.parent.rotateX(Math.radians(sphere.rotationSpeed));
   };
@@ -255,10 +255,10 @@ function animate() {
 }
 
 window.onload = function () {
-  Math.radians = function (degrees) { degrees * Math.PI / 180; };
+  Math.radians = (degrees) => degrees * Math.PI / 180;
    
   // Converts from radians to degrees.
-  Math.degrees = function (radians) { radians * 180 / Math.PI; };
+  Math.degrees = (radians) => radians * 180 / Math.PI;
 
   init();
   animate();
